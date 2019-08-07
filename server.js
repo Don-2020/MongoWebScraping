@@ -2,11 +2,12 @@
 // (be sure to watch the video to see
 // how to operate the site in the browser)
 // -/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
-
 // Require our dependencies
 var express = require("express");
 var mongoose = require("mongoose");
 var exphbs = require("express-handlebars");
+
+mongoose.set('useCreateIndex', true);
 
 // Set up our port to be either the host's designated port, or 3000
 var PORT = process.env.PORT || 3000;
@@ -34,7 +35,7 @@ app.use(routes);
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
 // Connect to the Mongo DB
-mongoose.connect(MONGODB_URI);
+mongoose.connect(MONGODB_URI,  { useNewUrlParser: true });
 
 // Listen on the port
 app.listen(PORT, function() {
